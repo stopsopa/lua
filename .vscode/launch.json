@@ -6,7 +6,7 @@
         "request": "launch",
         "name": "Lua Launch",
         "program": "${fileDirname}/${fileBasenameNoExtension}.lua",
-        "cwd": "${workspaceFolder}",
+        "cwd": "${fileDirname}",
         // "args": ["ab", "c d"],
         "args": ["--stdinfile", "input.txt"],        
         "stopOnEntry": true
