@@ -1,5 +1,7 @@
 
+# setup
 
+Just use .vscode/README.md
 
 # lua formatter for vscode
 

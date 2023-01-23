@@ -3,6 +3,9 @@
 -- This first edition was written for Lua 5.0. While still largely relevant for later versions, there are some differences.
 -- The fourth edition targets Lua 5.3 and is available at Amazon and other bookstores.
 -- By buying the book, you also help to support the Lua project.
+
+-- MORE ABOUT COMMENTS: http://www.lua.org/pil/1.3.html
+
 function fact(n)
     if n == 0 then
         return 1
