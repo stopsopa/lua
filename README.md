@@ -25,4 +25,7 @@ https://formulae.brew.sh/formula/luarocks
 more: https://luarocks.org/#quick-start
 
 
+# where to contiune:
+http://www.lua.org/pil/4.1.html
+
 
