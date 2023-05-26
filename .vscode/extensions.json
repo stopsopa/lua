@@ -1,0 +1,25 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+  // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+
+  // HINT: In order to install all recomended extensions after fresh clone of repository
+  //        just wait for popup in right bottom corner and use that
+  //        or trigger it manually from Command Palette: Extensions: Show Recommended Extensions
+  //
+  // HINT:  go to extensions tab on the left in vscode and list installed extensions. 
+  //        then you can right click on any installed extension
+  //        and choose "Copy Extension ID"
+
+  // List of extensions which should be recommended for users of this workspace.
+  "recommendations": [
+    "ldez.ignore-files",
+    "satoren.lrdb",
+    "yinfei.luahelper",
+    "ms-vscode.makefile-tools",
+    "ionutvmi.path-autocomplete",
+    "esbenp.prettier-vscode",
+    "redhat.vscode-yaml"
+  ],
+  // List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+  "unwantedRecommendations": []
+}

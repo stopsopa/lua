@@ -2,8 +2,8 @@
 
 
 print('running main.lua')
-print(type(arg))
-print(arg)
+print("type:", type(arg))
+print("args:", arg)
 local inspect = require 'inspect'
 print(inspect(arg))
 

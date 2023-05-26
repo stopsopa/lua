@@ -1,3 +1,4 @@
+-- http://www.lua.org/pil/4.3.html
 -- http://www.lua.org/pil/4.3.1.html
 if op == "+" then
     r = a + b
@@ -30,6 +31,8 @@ until i == 0
 for i = 0, 4, 1 do
     print('for:', i)
 end
+
+for i=1,10 do print('for i=1,10 do', i) end
 
 -- TODO: add also for with function example
 -- http://www.lua.org/pil/4.3.5.html

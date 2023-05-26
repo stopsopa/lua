@@ -1,4 +1,6 @@
 -- http://www.lua.org/pil/2.2.html#:~:text=Lua%20considers%20both%20zero%20and%20the%20empty%20string%20as%20true%20in%20conditional%20tests
+-- consider false and nil as false and anything else as true. 
+-- Beware that, unlike some other scripting languages, Lua considers both zero and the empty string as true in conditional tests.
 
 test = true;
 if test then

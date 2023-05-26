@@ -3,7 +3,7 @@ http://www.lua.org/pil/1.1.html
 
 ```
 
-lua -la.txt -lb.lua
+lua -la.lua -lb.lua
 
 ```
 
@@ -29,5 +29,15 @@ n = norm(3.4, 1.0)
 print(twice(n))      --> 7.0880180586677
 EEE
 
+
+```
+
+or then
+
+```
+cat <<EEE | lua
+dofile("a.lua");
+dofile("b.lua");
+EEE
 
 ```

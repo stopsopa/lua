@@ -4,17 +4,17 @@ local inspect = require 'inspect'
 a = {}
 k = 'x';
 a[k] = 'test';
-print(a)
-print(inspect(a))
+print('just print', a)
+print('inspect', inspect(a))
 
-print('reference:')
+print('===reference:')
 b = a
 b['t'] = 'tval'
 
 print(inspect(b))
 print(inspect(a))
 
-print('syntactic sugar:')
+print('===syntactic sugar:')
 
 a = {}
 a['one'] = 'oneval';
@@ -22,76 +22,76 @@ a.two = 'twoval';
 
 print(inspect(a))
 
-print('int key and str key are not the same:');
+print('===int key and str key are not the same:');
 a = {};
 a["10"] = '10string';
 a[10] = '10int';
 print(inspect(a))
 
-print('iterating using pairs: (WARNING: ORDER NOT RESPECTED)')
+print('===iterating using pairs: (WARNING: ORDER NOT RESPECTED)')
 a.three = '3val';
 a.four = '4val';
 for i, line in pairs(a) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 
-print('again:')
+print('===nul values will skip iterating over that element')
+print('===again:')
 a.three = nil;
 for i, line in pairs(a) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 
-print('nul values will skip iterating over that element')
-a.three = nil;
+print('==using ipairs DOESNT WORK? ??? ')
 for i, line in ipairs(a) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 
-print('create numeric: this will keep the order (WARING; but only for elements with numerical keys)')
+print('===create numeric: this will keep the order (WARNING; but only for elements with numerical keys)')
 a = {}
 a[2] = 'a'
 a[1] = 'b'
-a['3'] = 'c'
+a['3'] = 'c this will be treated as string'
 a['four'] = 'd'
 a[4] = 'four'
 a['not end'] = nil
-a['and this is end'] = 'end..'
+a['and this is end'] = 'end..' -- any other than number will be listed in random order, sometimes one way, sometimes another order
 for i, line in pairs(a) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 
-print('table_with_holes');
+print('===table_with_holes');
 table_with_holes = {
     [1] = "value_1",
     [3] = "value_3"
 }
 
 for i, line in pairs(table_with_holes) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 
 -- http://www.lua.org/pil/3.6.html
-print('sequences notation (table constructors):')
+print('===sequences notation (table constructors):')
 
 days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
 for i, line in ipairs(days) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 
 tab = {math.sin(1), math.sin(2), math.sin(3), math.sin(4), math.sin(5), math.sin(6), math.sin(7), math.sin(8)}
 for i, line in ipairs(tab) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 
 a = {
     x = 'some x',
     y = 'some y'
 }
-for i, line in pairs(a) do
-    print('>' .. i .. '< >' .. line .. '<')
+for i, line in pairs(a) do -- this will print it random, sometimes x first, sometimes y
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 
-print('linked list');
+print('===linked list');
 
 list = nil
 lines = {"line1", "line2", "line3"}
@@ -113,7 +113,7 @@ end
 --     }
 -- end
 
-print('then we can iterat through linked list:')
+print('===then we can iterate through linked list:')
 l = list
 while l do
     print("linked value", l.value)
@@ -128,7 +128,7 @@ opnames = {
     ["/"] = "div"
 }
 for i, line in pairs(opnames) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 i = 20;
 s = "-"
@@ -138,7 +138,7 @@ a = {
     [i + 2] = s .. s .. s
 }
 for i, line in pairs(a) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
 
 days = {
@@ -150,6 +150,7 @@ days = {
     "Friday",
     "Saturday"
 }
+print(inspect(days))
 for i, line in pairs(days) do
-    print('>' .. i .. '< >' .. line .. '<')
+    print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
