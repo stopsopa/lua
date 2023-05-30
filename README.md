@@ -58,8 +58,13 @@ https://formulae.brew.sh/formula/luarocks
 
 more: https://luarocks.org/#quick-start
 
+# useful links
+- [find latest version - just go to homepage - ](https://www.lua.org/)
+- [reference manual v 5.1 - documentation version](https://www.lua.org/manual/5.1)
+- [reference manual v 5.4 - latest version](https://www.lua.org/manual/5.4/)
 
 # where to contiune:
 http://www.lua.org/pil/4.1.html
+
 
 
