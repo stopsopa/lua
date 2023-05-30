@@ -1,4 +1,7 @@
 
+# ebook
+Programming_in_Lua,_4th_ed._(2017)_.pdf
+
 # setup
 
 Just use .vscode/README.md
