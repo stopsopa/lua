@@ -1,6 +1,9 @@
 
 # ebook
 Programming_in_Lua,_4th_ed._(2017)_.pdf
+Downloaded from https://www.lua.org/pil/#:~:text=of%20the%20language.-,The%20book%20is%20available%20at%20the%20main%20online%20stores%20and%20also%20as%20an%20e%2Dbook.,-Third%20edition
+g(The fourth edition updates the book to Lua 5.3 and marks a complete reorganization of the text. Building on many years of experience teaching Lua, Roberto has restructured the book to present the material in a growing order of complexity, allowing the reader to better absorb the character of the language. The book is available at the main online stores and also as an e-book.)
+
 
 # setup
 
