@@ -3,7 +3,7 @@ function inspc(data, i)
     local t = type(data);
     if t == 'table' then
         local buff = '{'
-        for k, v in ipairs(data) do
+        for k, v in pairs(data) do
             buff = buff .. '\n' .. string.rep('  ', i + 1) .. '[' .. inspc(k) .. '] : ' .. inspc(v, i + 1)
         end
         return buff .. '\n' .. string.rep('  ', i) .. '}'
