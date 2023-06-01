@@ -1,6 +1,20 @@
 -- http://www.lua.org/pil/2.5.html
 local inspect = require 'inspect'
 
+function inspc(data, i)
+    i = i or 0;
+    local t = type(data);
+    if t == 'table' then
+        local buff = '{'
+        for k, v in pairs(data) do
+            buff = buff .. '\n' .. string.rep('  ', i + 1) .. '[' .. inspc(k) .. '] : ' .. inspc(v, i + 1)
+        end
+        return buff .. '\n' .. string.rep('  ', i) .. '}'
+    end
+    return t .. ' >' .. data .. '<'
+end
+
+
 a = {}
 k = 'x';
 a[k] = 'test';
@@ -73,7 +87,7 @@ end
 -- http://www.lua.org/pil/3.6.html
 print('===sequences notation (table constructors):')
 
-days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"}
+days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",}
 for i, line in ipairs(days) do
     print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
@@ -125,7 +139,7 @@ opnames = {
     ["+"] = "add",
     ["-"] = "sub",
     ["*"] = "mul",
-    ["/"] = "div"
+    ["/"] = "div",
 }
 for i, line in pairs(opnames) do
     print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
@@ -135,7 +149,7 @@ s = "-"
 a = {
     [i + 0] = s,
     [i + 1] = s .. s,
-    [i + 2] = s .. s .. s
+    [i + 2] = s .. s .. s,
 }
 for i, line in pairs(a) do
     print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
@@ -148,9 +162,38 @@ days = {
     "Wednesday",
     "Thursday",
     "Friday",
-    "Saturday"
+    "Saturday",
 }
 print(inspect(days))
 for i, line in pairs(days) do
     print('key type >' .. type(i) .. '<' .. '>' .. i .. '< >' .. line .. '<')
 end
+
+polyline = {color="blue",
+ thickness=2,
+ npoints=4,
+ {x=0, y=0}, -- polyline[1]
+ {x=-10, y=0}, -- polyline[2]
+ {x=-10, y=1}, -- polyline[3]
+ {x=0, y=1} -- polyline[4]
+ }
+
+ print(inspc(polyline))
+
+ print '----- safe navigation'
+
+company = {
+    director = {
+        address = {
+            zipcode = 'kt3 bt4'
+        }
+    }
+}
+
+-- https://stopsopa.github.io/lua/ebook.pdf page 39
+E = {}
+ zip = (((company or E).director or E).address or E).zipcode
+
+ print('zip: ', zip)
+ zip = (((company or E).director2 or E).address or E).zipcode
+ print('zip: ', zip)
