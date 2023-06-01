@@ -1,4 +1,4 @@
--- https://stopsopa.github.io/lua/ebook.pdf:page13
+-- https://stopsopa.github.io/lua/ebook.pdf :page13
 function inspc(data, i)
     i = i or 0;
     local t = type(data);

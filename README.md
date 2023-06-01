@@ -6,7 +6,7 @@ g(The fourth edition updates the book to Lua 5.3 and marks a complete reorganiza
 
 url: https://stopsopa.github.io/lua/ebook.pdf
 
-to refer use notation https://stopsopa.github.io/lua/ebook.pdf:page67
+to refer use notation https://stopsopa.github.io/lua/ebook.pdf :page67
 WARNING/NOTE: use pages of the book not pages of pdf in browser
 WARNING/NOTE: use pages of the book not pages of pdf in browser
 WARNING/NOTE: use pages of the book not pages of pdf in browser
