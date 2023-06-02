@@ -9,7 +9,7 @@ function inspc(data, i)
         end
         return buff .. '\n' .. string.rep('  ', i) .. '}'
     end
-    return t .. ' >' .. data .. '<'
+    return t .. ' >' .. tostring(data) .. '<'
 end
 
 print('0.4', 0.4)

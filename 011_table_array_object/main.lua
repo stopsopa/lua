@@ -11,7 +11,7 @@ function inspc(data, i)
         end
         return buff .. '\n' .. string.rep('  ', i) .. '}'
     end
-    return t .. ' >' .. data .. '<'
+    return t .. ' >' .. tostring(data) .. '<'
 end
 
 

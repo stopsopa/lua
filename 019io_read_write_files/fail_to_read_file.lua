@@ -1,3 +1,4 @@
+-- https://stopsopa.github.io/lua/ebook.pdf page 53
 function inspc(data, i)
     i = i or 0;
     local t = type(data);
@@ -10,4 +11,19 @@ function inspc(data, i)
     end
     return t .. ' >' .. tostring(data) .. '<'
 end
-return inspc;
+
+function open(filename, mode)
+    mode = mode or 'r'
+    local f = io.open(filename, mode)
+    if f == nil then
+        io.stderr:write("Can't open file >" .. filename .. "<")
+        os.exit(5)
+    end
+    return f
+end
+
+local filename = 'non_existing'
+local f = open(filename)
+print(inspc(f))
+local t = f:read("a")
+f:close()

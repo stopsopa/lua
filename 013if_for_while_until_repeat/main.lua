@@ -28,11 +28,21 @@ repeat
 until i == 0
 
 -- http://www.lua.org/pil/4.3.4.html
-for i = 0, 4, 1 do
+for i = 0, 4, 2 do
     print('for:', i)
 end
 
-for i=1,10 do print('for i=1,10 do', i) end
+-- https://stopsopa.github.io/lua/ebook.pdf page 60
+for i = 1, math.huge do
+    print('for i -> math.huge: ', i)
+    if i == 10 then
+        break
+    end
+end
+
+for i = 1, 10 do
+    print('for i=1,10 do', i)
+end
 
 -- TODO: add also for with function example
 -- http://www.lua.org/pil/4.3.5.html
