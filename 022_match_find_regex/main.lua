@@ -1,30 +1,29 @@
 function inspc(data, i, refCounter, visited)
     refCounter = refCounter or 1
     i = i or 0
-    visited = visited or {}  -- keep track of visited tables
+    visited = visited or {} -- keep track of visited tables
 
     local t = type(data)
     if t == 'table' then
         -- Check if the current table has been visited before
         if visited[data] then
-            return '■■■ ■■■ ■■■ CIRCULAR REFERENCE ■■■ '..visited[data]..' ■■■ ■■■ ■■■'
+            return '■■■ ■■■ ■■■ CIRCULAR REFERENCE ■■■ ' .. visited[data] ..
+                       ' ■■■ ■■■ ■■■'
         end
 
-        visited[data] = refCounter  -- Mark the current table as visited
+        visited[data] = refCounter -- Mark the current table as visited
         refCounter = refCounter + 1;
 
         local buff = '{'
         for k, v in pairs(data) do
-            buff = buff .. '\n' .. string.rep('  ', i + 1) .. '[' .. inspc(k, i + 1, refCounter, visited) .. '] : ' .. inspc(v, i + 1, refCounter, visited)
+            buff = buff .. '\n' .. string.rep('  ', i + 1) .. '[' .. inspc(k, i + 1, refCounter, visited) .. '] : ' ..
+                       inspc(v, i + 1, refCounter, visited)
         end
-        visited[data] = nil  -- Remove the mark for the current table
+        visited[data] = nil -- Remove the mark for the current table
         return buff .. '\n' .. string.rep('  ', i) .. '}'
     end
     return t .. ' >' .. tostring(data) .. '<'
 end
-
-
-
 
 print '------------ string.find:'
 -- https://stopsopa.github.io/lua/ebook.pdf page 77
@@ -151,12 +150,92 @@ function trim(s)
     s = string.gsub(s, "^%s*(.-)%s*$", "%1")
     return s
 end
-print("trim: >"..trim("    test     ").."<")
-print("trim: >"..trim([[ 
+print("trim: >" .. trim("    test     ") .. "<")
+print("trim: >" .. trim([[ 
 
 abc
 dofile
 
-]]).."<")
+]]) .. "<")
 
+function expand(s)
+    return (string.gsub(s, "$([%w_]+)", _G))
 
+    -- optionally also like this:
+    -- return (string.gsub(s, "$([%w_]+)", function(n)
+    --     return tostring(_G[n])
+    -- end))
+
+end
+
+name = "Lua";
+_G.__status = "great"
+print(expand("$name is $__status, isn't it?")) -- > Lua is great, isn't it?
+
+print '-------------- recirsive latex converter'
+-- https://stopsopa.github.io/lua/ebook.pdf page 84
+function toxml(s)
+    s = string.gsub(s, "\\(%a+)(%b{})", function(tag, body)
+        body = string.sub(body, 2, -2) -- remove the brackets
+        body = toxml(body) -- handle nested commands
+        return string.format("<%s>%s</%s>", tag, body, tag)
+    end)
+    return s
+end
+print('from: ', "\\title{The \\bold{big} example}")
+print('to  : ', toxml("\\title{The \\bold{big} example}"))
+-- > <title>The <bold>big</bold> example</title>
+
+print '---------------------- url encoding'
+
+-- https://stopsopa.github.io/lua/ebook.pdf page 84
+function unescape(s)
+
+    s = string.gsub(s, "+", " ")
+    s = string.gsub(s, "%%(%x%x)", function(h)
+        return string.char(tonumber(h, 16))
+    end)
+    return s
+end
+
+print('unescape("a%2Bb+%3D+c"): ', unescape("a%2Bb+%3D+c")) -- > a+b = c
+
+-- https://stopsopa.github.io/lua/ebook.pdf page 85
+function decode(s)
+    local cgi = {}
+    for name, value in string.gmatch(s, "([^&=]+)=([^&=]+)") do
+        name = unescape(name)
+        value = unescape(value)
+        cgi[name] = value
+    end
+    return cgi;
+end
+
+print('decode("abc=def&ghi=jkl"): ', inspc(decode("abc=def&ghi=jkl")));
+
+function escape(s)
+    s = string.gsub(s, "[&=+%%%c]", function(c)
+        return string.format("%%%02X", string.byte(c))
+    end)
+    s = string.gsub(s, " ", "+")
+    return s
+end
+
+function encode(t)
+    local b = {}
+    for k, v in pairs(t) do
+        b[#b + 1] = (escape(k) .. "=" .. escape(v))
+    end
+    -- concatenates all entries in 'b', separated by "&"
+    return table.concat(b, "&")
+end
+
+t = {
+    name = "al",
+    query = "a+b = c",
+    q = "yes or no"
+}
+print(encode(t)) -- > q=yes+or+no&query=a%2Bb+%3D+c&name=al
+
+print '------------------ tab expansion:'
+print('string.match("hello", "()ll()"): ', string.match("hello", "()ll()")) -- > 3 5
