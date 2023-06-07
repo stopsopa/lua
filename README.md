@@ -11,7 +11,13 @@ WARNING/NOTE: use pages of the book not pages of pdf in browser
 WARNING/NOTE: use pages of the book not pages of pdf in browser
 WARNING/NOTE: use pages of the book not pages of pdf in browser
 
+# libs:
+- https://github.com/blitmap/lua-snippets/blob/master/string-pad.lua
+
 # setup
+
+# Precedence - (priorytet operatorów)
+https://stopsopa.github.io/lua/ebook.pdf page 22
 
 Just use .vscode/README.md
 

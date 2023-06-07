@@ -239,3 +239,44 @@ print(encode(t)) -- > q=yes+or+no&query=a%2Bb+%3D+c&name=al
 
 print '------------------ tab expansion:'
 print('string.match("hello", "()ll()"): ', string.match("hello", "()ll()")) -- > 3 5
+
+function expandTabs(s, tab)
+    tab = tab or 8 -- tab "size" (default is 8)
+    local corr = 0 -- correction
+    s = string.gsub(s, "()\t", function(p)
+        local sp = tab - ((p - 1 + corr) % tab)
+        corr = corr - 1 + sp
+        return string.rep(" ", sp)
+    end)
+    return s
+end
+
+print(expandTabs("start\t\tmid\t\tend"))
+
+print '----- ----- preg_quote:'
+-- https://stopsopa.github.io/lua/ebook.pdf page 88
+s1 = 'abc%(). ( ) . % + - * ? [ ] ^ $ end'
+s1 = string.gsub(s1, "(%W)", "%%%1")
+print('preg_quote: ', s1)
+
+s2 = 'abc%(). ( ) . % + - * ? [ ] ^ $ end'
+s2 = string.gsub(s2, "%%", "%%%%")
+print('preg_quote: ', s2)
+
+print '-------- code decode slashed characters'
+
+function code(s)
+    return (string.gsub(s, "\\(.)", function(x)
+        return string.format("\\%03d", string.byte(x))
+    end))
+end
+function decode(s)
+    return (string.gsub(s, "\\(%d%d%d)", function(d)
+        return "\\" .. string.char(tonumber(d))
+    end))
+end
+s = [[follows a typical string: "This is \"great\"!".]]
+s = code(s)
+s = string.gsub(s, '".-"', string.upper)
+s = decode(s)
+print(s) -- > follows a typical string: "THIS IS \"GREAT\"!".
