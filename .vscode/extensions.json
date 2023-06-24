@@ -6,7 +6,7 @@
   //        just wait for popup in right bottom corner and use that
   //        or trigger it manually from Command Palette: Extensions: Show Recommended Extensions
   //
-  // HINT:  go to extensions tab on the left in vscode and list installed extensions. 
+  // HINT:  go to extensions tab on the left in vscode and list installed extensions.
   //        then you can right click on any installed extension
   //        and choose "Copy Extension ID"
 
@@ -15,6 +15,7 @@
     "ldez.ignore-files",
     "satoren.lrdb",
     "yinfei.luahelper",
+    "satoren.lualint",
     "ms-vscode.makefile-tools",
     "ionutvmi.path-autocomplete",
     "esbenp.prettier-vscode",
